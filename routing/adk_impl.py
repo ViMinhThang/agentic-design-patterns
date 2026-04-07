@@ -5,7 +5,7 @@ from typing import Any, Dict, Optional
 from google.adk.agents import Agent
 from google.adk.events import Event
 from google.adk.runners import InMemoryRunner
-from google.adk.tools import FunctionTool
+from google.adk.tools.function_tool import FunctionTool
 from google.genai import types
 
 

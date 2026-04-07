@@ -1,5 +1,10 @@
 from typing import Any, TypedDict
 
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.runnables import RunnableBranch, RunnablePassthrough
+from langchain_google_genai import ChatGoogleGenerativeAI
+
 
 class RequestInput(TypedDict):
     request: str
@@ -9,11 +14,6 @@ class CoordinatorOutput(TypedDict):
     decision: str
     request: Any
 
-
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.runnables import RunnableBranch, RunnablePassthrough
-from langchain_google_genai import ChatGoogleGenerativeAI
 
 # --- Configuration ---
 # Ensure your API key environment variable is set (GOOGLE_API_KEY)
@@ -59,7 +59,8 @@ coordinator_router_prompt = ChatPromptTemplate.from_messages(
     ]
 )
 coordinator_router_chain = None
-if llm:
+if llm is not None:
+    assert llm is not None
     coordinator_router_chain = coordinator_router_prompt | llm | StrOutputParser()
 
 # --- Define the Delegation Logic (equivalent to ADK's Auto-Flow base on sub agents) ---
