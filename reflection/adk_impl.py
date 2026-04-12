@@ -19,7 +19,7 @@ You are a meticulous fact-checker.
 - "status": A string, either "ACCURATE" or "INACCURATE".
 - "reasoning": A string providing a clear explanation for your
 status, citing specific issues if any are found.
-8""",
+""",
     output_key="review_output",  # The structured dictionary is saved here.
 )
 # The SequentialAgent ensures the generator runs before the reviewer.

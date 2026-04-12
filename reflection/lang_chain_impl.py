@@ -6,29 +6,29 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 
 # --- Configuration ---
-# Load environment variables fron .env file (for OPEN_API_KEY)
+# Load environment variables from .env file (for OPEN_API_KEY)
 load_dotenv()
 
 # check if the API key is set
 if not os.getenv("OPENAI_API_KEY"):
     raise ValueError("OPENAI_API_KEY not found in .env file. Please add it.")
 
-# Initialize the Chat LLM. We use gpt-40 for better reasoning
+# Initialize the Chat LLM. We use gpt-4o for better reasoning
 # A lower temperature is used for more deterministic outputs
 llm = ChatOpenAI(model="gpt-4o", temperature=0.1)
 
 
 def run_reflection_loop():
     """
-    Demonstrates a multi-step AI reflection loop to progessively
+    Demonstrates a multi-step AI reflection loop to progressively
     improve a Python function.
     """
     # --- The Core Task ---
     task_prompt = """
-    Yout task is to create a Python function named `calculat_factorial`
+    Your task is to create a Python function named `calculate_factorial`
     This function should do the following:
     1. Accept a single integer `n` as input.
-    2. "Calculate it's factorial(n!)"
+    2. "Calculate its factorial(n!)"
     3. Include a clear docstring explaining what the function does.
     4. Handle edge cases: The factorial of 0 is 1
     5. Handle invalid input: Raise a ValueError if the input is a negative number

@@ -29,7 +29,7 @@ extraction_chain = prompt_extract | llm | StrOutputParser()
 # The full chain passes the output of the extraction chain into 'specifications'
 # variable fro the transformation prompt.
 full_chain = (
-    {"specifications:": extraction_chain} | prompt_transform | llm | StrOutputParser()
+    {"specifications": extraction_chain} | prompt_transform | llm | StrOutputParser()
 )
 
 # --- Run the Chain --

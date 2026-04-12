@@ -6,13 +6,13 @@ from google.adk.tools.google_search_tool import google_search
 researcher_agent_1 = LlmAgent(
     name="RenewableEnergyResearcher",
     model=GEMINI_MODEL,
-    instruction="""You are an AI Reseacher Assistant specializing in energy.
+    instruction="""You are an AI Researcher Assistant specializing in energy.
     Research the latest advancements in 'renewable energy sources'.
     Use the Google Search tool provided.
-    Summarize your key findings concoisely (1-2 sentences).
+    Summarize your key findings concisely (1-2 sentences).
     Output *only* the summary.
     """,
-    description="Reseachers renewable energy sources.",
+    description="Researches renewable energy sources.",
     tools=[google_search],
     output_key="renewable_energy_result",
 )

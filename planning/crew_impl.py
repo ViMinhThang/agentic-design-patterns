@@ -1,11 +1,10 @@
 import os
-
 from crewai import Agent, Crew, Process, Task
-from dotenv import load_env
+from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 
 # Load environment variables from .env file for security
-load_env()
+load_dotenv()
 
 # 1 Explicitly define the language model for clarity
 llm = ChatOpenAI(model="gpt-4-turbo")
@@ -15,9 +14,9 @@ planner_writer_agent = Agent(
     role="Article Planner and Writer",
     goal="Plan and then write a concise, engaging summary on a specified topic",
     backstory=(
-        "You are an expert technical writer and content strategist",
-        "Your strength lies in creating a clear, actionable plan before writing",
-        "ensuring the final sumary is both informative and easy to digest",
+        "You are an expert technical writer and content strategist. "
+        "Your strength lies in creating a clear, actionable plan before writing, "
+        "ensuring the final summary is both informative and easy to digest."
     ),
     verbose=True,
     allow_delegation=False,
@@ -40,14 +39,17 @@ high_level_task = Task(
     ),
     agent=planner_writer_agent,
 )
+
 # Create the crew with a clear process
 crew = Crew(
     agents=[planner_writer_agent],
     tasks=[high_level_task],
     process=Process.sequential,
 )
-# Execute the task
-print("## Running the planning and writing task ##")
-result = crew.kickoff()
-print("\n\n---\n## Task Result ##\n---")
-print(result)
+
+if __name__ == "__main__":
+    # Execute the task
+    print("## Running the planning and writing task ##")
+    result = crew.kickoff()
+    print("\n\n---\n## Task Result ##\n---")
+    print(result)
